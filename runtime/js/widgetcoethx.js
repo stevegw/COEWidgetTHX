@@ -81,11 +81,11 @@ class Widgetcoethx {
                             console.log(" data.data.rows[0].result >>>" + pvzId);
                             URL = '/Thingworx/Things' + '/CAD_Repo/Services/saveJsonMetaData';
                            
-                            appKeyParams = {
+                            params = {
                                 "pvzId": pvzId
                               };
 
-                              http.post(URL, appKeyParams, {
+                              http.post(URL, params, {
                                 headers: headers,
                               })
                               .then(
