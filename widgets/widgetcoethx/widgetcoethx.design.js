@@ -39,24 +39,7 @@
 
       // List of properties that will be displayed in the widget properties panel once it's been dropped on the Canvas
       properties: [
-        {
-          name: 'incomingdata',
-          label: 'Some Incoming data',
-          datatype: 'json',
-          default: {},
-          isBindingTarget: true,
-          isBindingSource: false,
-          showInput: false
-        },
-        {
-          name: 'outgoingdata',
-          label: 'some return data',
-          datatype: 'string',
-          default: '',
-          isBindingTarget: false,
-          isBindingSource: true,
-          showInput: false
-        },  
+
         {
           name: 'actionid',
           label: 'Some action ID',
@@ -67,12 +50,14 @@
           showInput: true,
           editor: 'select',
           options: [
-            {label: 'Information Dialog', value: "WorkInstructionDialog"},
-            {label: 'Display List', value: "DisplayList"},
-            {label: 'GetMetaList', value: "GetMetaList"},
-            {label: 'Move Model', value: "MoveModel"},
+           
+            {label: 'Get All (model,related docs & structure)', value: "GetAll"},
+            {label: 'Get Documents', value: "GetDocuments"},
             {label: 'Get Dynamic Model', value: "GetDynamicModel"},
+            {label: 'Get Parts by Context and Filter', value: "GetPartsByContextAndFilter"},
+            {label: 'Get Structure', value: "GetStructureWithLevels"},
             {label: 'No action', value: "NoAction"}
+
             ]
         },
         {
@@ -85,40 +70,76 @@
           showInput: true
         },
         {
-          name: 'width',
-          label: 'width',
+          name: 'partid',
+          label: 'Part ID',
+          datatype: 'json',
+          default: {},
+          isBindingTarget: true,
+          isBindingSource: false,
+          showInput: false
+        },
+        {
+          name: 'partnamefilter',
+          label: 'Part Name Filter',
           datatype: 'string',
-          default: '40vw',
+          default: 'ender',
           isBindingTarget: true,
           isBindingSource: false,
           showInput: true
         },
         {
-          name: 'height',
-          label: 'height',
+          name: 'wccontext',
+          label: 'Windchill Context',
           datatype: 'string',
-          default: '60vh',
+          default: 'WGM-AutoCAD',
           isBindingTarget: true,
           isBindingSource: false,
           showInput: true
         },
         {
-          name: 'topoffset',
-          label: 'top offset',
+          name: 'modelurl',
+          label: 'Model Url',
           datatype: 'string',
-          default: '50px',
-          isBindingTarget: true,
-          isBindingSource: false,
-          showInput: true
+          default: '',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
+        }, 
+        {
+          name: 'relateddocs',
+          label: 'Related Documents',
+          datatype: 'string',
+          default: '',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
+        }, 
+        {
+          name: 'structure',
+          label: 'Structure',
+          datatype: 'string',
+          default: '',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
+        }, 
+        {
+          name: 'parts',
+          label: 'Parts',
+          datatype: 'string',
+          default: '',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
         },
         {
-          name: 'leftoffset',
-          label: 'left offset',
+          name: 'message',
+          label: 'Message',
           datatype: 'string',
-          default: '1px',
-          isBindingTarget: true,
-          isBindingSource: false,
-          showInput: true
+          default: '',
+          isBindingTarget: false,
+          isBindingSource: true,
+          showInput: false
         }
       ],
 
@@ -131,6 +152,10 @@
         {
           name: 'stop',
           label: 'Stop'
+        },
+        {
+          name: 'getall',
+          label: 'Get Model,Docs & Structure'
         }
       ],
 
@@ -143,6 +168,14 @@
         {
           name: 'completed',
           label: 'Completed action'
+        },
+        {
+          name: 'message',
+          label: 'message fired'
+        },
+        {
+          name: 'failure',
+          label: 'Failed action'
         }
       ],
 
@@ -154,7 +187,7 @@
       // use the amazingar as a prefix to images helps remind you where they are being used
 
       dependencies: {
-        files         : ['js/widgetcoethx-ng.js','js/widgetcoethx.js', 'js/matrix.js', 'js/config.js', 'images/widgetcoethx_back.png', 'images/widgetcoethx_next.png' ,'images/widgetcoethx_expand.png' , '/js/gridjs.production.min.js'],
+        files         : ['js/widgetcoethx-ng.js','js/widgetcoethx.js',  'js/config.js', 'images/widgetcoethx_back.png', 'images/widgetcoethx_next.png' ,'images/widgetcoethx_expand.png' , '/js/gridjs.production.min.js'],
         angularModules: ['widgetcoethx-ng']
       },
 
@@ -171,7 +204,7 @@
       // and always have a delegate-field="delegate" defined
       //
       runtimeTemplate: function (props) {
-        var tmpl = '<div ng-widgetcoethx  incomingdata-field="me.incomingdata"  outgoingdata-field="me.outgoingdata" actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}}   width-field={{me.width}} height-field={{me.height}} topoffset-field={{me.topoffset}} leftoffset-field={{me.leftoffset} modelid-field={{me.modelid}}  }  delegate-field="delegate"></div>' ; 
+        var tmpl = '<div ng-widgetcoethx  actionid-field={{me.actionid}} autolaunch-field={{me.autolaunch}} partid-field="me.partid"  partnamefilter-field={{me.partnamefilter}} wccontext-field={{me.wccontext}}  modelurl-field="me.modelurl" relateddocs-field="me.relateddocs" structure-field="me.structure" parts-field="me.parts"  message-field="me.message"    delegate-field="delegate"></div>' ; 
         return tmpl;
       }
     };

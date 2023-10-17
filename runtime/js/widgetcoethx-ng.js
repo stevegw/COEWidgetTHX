@@ -34,14 +34,16 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         // = outgoing data 
         //
 
-        incomingdataField : '=',
-        outgoingdataField : '=',
+        partidField : '=',
         actionidField : '@',
         autolaunchField: '@',
-        widthField : '@',
-        heightField : '@',
-        topoffsetField : '@',
-        leftoffsetField : '@',
+        partnamefilterField : '@',
+        wccontextField : '@',
+        modelurlField : '=',
+        relateddocsField : '=',
+        structureField : '=',
+        partsField : '=',
+        messageField : '=',
         delegateField: '='     // This a special field used to pass events like start 
 
       },
@@ -88,7 +90,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           //
           //if (widgetcoe == undefined) {
             try {
-               widgetcoethx = new Widgetcoethx( config.appKey,  scope,scope.incomingdataField , scope.actionidField , scope.widthField, scope.heightField , scope.topoffsetField ,scope.leftoffsetField , scope.renderer);
+               widgetcoethx = new Widgetcoethx( config.appKey, scope, scope.actionidField , scope.partidField ,  scope.partnamefilterField , scope.wccontextField, scope.renderer);
                widgetcoethx.doAction();
            
               }catch(ex) {
@@ -108,7 +110,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         //
         var start = function() {
 
-          if (scope.incomingdataField != undefined && scope.incomingdataField != '') {
+         // if (scope.partidField != undefined && scope.partidField != '') {
             console.log('Starting');
             // decide what to do when the start is fired
             // and let others know
@@ -116,7 +118,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             scope.$parent.fireEvent('started');
             executeWidget();
 
-          }
+         // }
         }
         var stop = function() {
           console.log('Stopping');
@@ -141,21 +143,21 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         // Its a good idea to check for empty values
         // When the use starts it will set the value to and that ius see as a data change
         //
-        scope.$watch('incomingdataField', function () {
-          console.log('dataField='+ scope.incomingdataField);
+        scope.$watch('partidField', function () {
+          console.log('partidField='+ scope.partidField);
 
-          if (scope.incomingdataField != undefined && scope.incomingdataField != '') {
-            // If you do want to start when there is any incoming data change
+          if (scope.partidField != undefined && scope.partidField != '' &&  scope.partidField.includes("wt.part"))  {
+            // If you do want to start when there is a.ny incoming data change
             // provide a autolaunchField with a checkbox and check for true or false
-            if (scope.autolaunchField == "true") {
+            scope.actionidField = "GetAll";
               $timeout(start,250); 
-            }
+            
           }
 
         });
 
 
-        scope.$watch('incomingidField', function () {
+        scope.$watch('partnamefilterField', function () {
           console.log('incomingidField='+ scope.incomingidField);
           //
           // Write your code here
@@ -163,14 +165,37 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           // This is just shown as a another ference watch
 
         });
-        scope.$watch('outgoingdataField', function () {
-          console.log('outgoingdataField='+ scope.outgoingdataField);
+
+        scope.$watch('wccontextField', function () {
+          console.log('incomingidField='+ scope.incomingidField);
           //
           // Write your code here
           // Currently ther is no logic required to do anything on action change
           // This is just shown as a another ference watch
 
         });
+
+
+        scope.$watch('partsField', function () {
+          console.log('partsField='+ scope.partsField);
+          //
+          // Write your code here
+          // Currently ther is no logic required to do anything on action change
+          // This is just shown as a another ference watch
+
+        });
+
+        scope.$watch('modelurlField', function () {
+          console.log('modelurlField='+ scope.modelurlField);
+          //
+          // Write your code here
+          // Currently ther is no logic required to do anything on action change
+          // This is just shown as a another ference watch
+
+        });
+
+
+
 
         //
         // delegateField watch is used to listen to events fired by the UI
@@ -202,7 +227,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         // Comment out once you have it working
         //
         scope.$watch( function() {
-          //console.log("widgetcoe watching for anything happening - uncomment this when you have all you watches working"); 
+          //console.log("widgetcoeTHX watching for anything happening - uncomment this when you have all you watches working");
+          //this.values(); 
         });
       }
     };
