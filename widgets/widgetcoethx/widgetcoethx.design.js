@@ -40,7 +40,7 @@
       // List of properties that will be displayed in the widget properties panel once it's been dropped on the Canvas
       properties: [
 
-        {
+/*         {
           name: 'actionid',
           label: 'Some action ID',
           datatype: 'string',
@@ -68,7 +68,7 @@
           isBindingTarget: true,
           isBindingSource: false,
           showInput: true
-        },
+        }, */
         {
           name: 'partid',
           label: 'Part ID',
@@ -145,26 +145,31 @@
 
        // List of services that will displayed in the widget properties panel
       services: [
+        // {
+        //   name: 'start',
+        //   label: 'Start'
+        // },
+
         {
-          name: 'start',
-          label: 'Start'
-        },
-        {
-          name: 'stop',
-          label: 'Stop'
+          name: 'getparts',
+          label: 'Get Parts'
         },
         {
           name: 'getall',
           label: 'Get Model,Docs & Structure'
+        },
+        {
+          name: 'stop',
+          label: 'Stop'
         }
       ],
 
       // List of events that will displayed in the widget properties panel
       events: [
-        {
-          name: 'clicked',
-          label: 'Clicked'
-        },
+        // {
+        //   name: 'clicked',
+        //   label: 'Clicked'
+        // },
         {
           name: 'completed',
           label: 'Completed action'

@@ -99,7 +99,7 @@ class Widgetcoethx {
                         "PartID": partID
                       };
 
-                    vuforiaScope.messageField = "Working ........................."+"\n"+ "Getting model based on Part selected" + "\n" + vuforiaScope.messageField;
+                    vuforiaScope.messageField = "Working ........................."+"\n"+ "Getting model based on Part selected with ID="+ partID + "\n" + vuforiaScope.messageField;
                     vuforiaScope.$parent.fireEvent('message');
 
                     http.post(URL, params, {
@@ -131,7 +131,6 @@ class Widgetcoethx {
                                       //return the PVZ path via outging field
                                         vuforiaScope.modelurlField = pvzPath;
                                         vuforiaScope.$parent.fireEvent('completed');
-                                        vuforiaScope.$parent.$applyAsync();
                                         vuforiaScope.messageField = "Model returned successful"+ "\n" + vuforiaScope.messageField;
                                         vuforiaScope.$parent.fireEvent('message');
                                   }
@@ -166,7 +165,7 @@ class Widgetcoethx {
           "PartID": partID
         };
 
-      vuforiaScope.messageField = "Getting Documents based on Part selected" + "\n" + vuforiaScope.messageField;
+      vuforiaScope.messageField = "Getting Documents based on Part selected with ID="+ partID + "\n" + vuforiaScope.messageField;
       vuforiaScope.$parent.fireEvent('message');
       http.post(URL, params, {
         headers: headers,
@@ -198,7 +197,7 @@ class Widgetcoethx {
 }
 
 
-    getPartsByContextAndNameFilter = function (thxappkey, vuforiaScope, partnameFilter, wcContext) {
+    getPartsByContextAndNameFilter = function (thxappkey, vuforiaScope, partnameFilter, wcContext ) {
 
       let http = vuforiaScope.data.http;
       var URL = '/Thingworx/Things' + '/WCHelper/Services/GetPartsByContextAndNameFilter';
@@ -213,7 +212,7 @@ class Widgetcoethx {
         "NameFilter": partnameFilter, "ProductContext": wcContext
       };
 
-      vuforiaScope.messageField = "Getting Parts based on context and filter" + "\n" + vuforiaScope.messageField;
+      vuforiaScope.messageField = "Getting Parts based on context=" +wcContext+ " and filter="+ partnameFilter + "\n" + vuforiaScope.messageField;
       vuforiaScope.$parent.fireEvent('message');
       //vuforiaScope.$parent.$applyAsync();
 
@@ -227,7 +226,7 @@ class Widgetcoethx {
               vuforiaScope.$parent.$applyAsync();
               vuforiaScope.$parent.fireEvent('completed');
               if (data.data.rows.length > 0) {
-                vuforiaScope.messageField = "Parts returned successful"+ "\n" + vuforiaScope.messageField;
+                vuforiaScope.messageField =  data.data.rows.length +" Parts returned successfully"+ "\n" + vuforiaScope.messageField;
               } else {
                 vuforiaScope.messageField = "No Parts found"+ "\n" + vuforiaScope.messageField;
               }
@@ -281,7 +280,7 @@ class Widgetcoethx {
 
             vuforiaScope.structureField = data.data;
             vuforiaScope.$parent.fireEvent('completed');
-            vuforiaScope.messageField = "Structure returned successful"+ "\n" + vuforiaScope.messageField;
+            vuforiaScope.messageField = "Structure returned successfully based on PartID="+partID +"\n" + vuforiaScope.messageField;
             vuforiaScope.$parent.fireEvent('message');
 
 

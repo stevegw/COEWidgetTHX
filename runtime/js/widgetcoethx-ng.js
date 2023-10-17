@@ -36,7 +36,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
         partidField : '=',
         actionidField : '@',
-        autolaunchField: '@',
+        //autolaunchField: '@',
         partnamefilterField : '@',
         wccontextField : '@',
         modelurlField : '=',
@@ -207,12 +207,29 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
             //   start(); 
             // };
 
-            delegate.start = function () {
+            // delegate.start = function () {
 
+            //   scope.$parent.$applyAsync();
+            //   $timeout(start,250); 
+
+            // };
+
+            delegate.getparts = function () {
+
+              scope.actionidField = "GetPartsByContextAndFilter";
               scope.$parent.$applyAsync();
               $timeout(start,250); 
 
             };
+
+            delegate.getall = function () {
+
+              scope.actionidField = "GetAll";
+              scope.$parent.$applyAsync();
+              $timeout(start,250); 
+
+            };
+
 
             delegate.stop = function () { 
               stop(); 
